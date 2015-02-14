@@ -1,6 +1,7 @@
 body, html {
 }
 body {
+	padding-top: 100px;
 }
 button{
 	background-color: #6dab2c;
@@ -9,6 +10,14 @@ button{
 	font-size: 20px;
 	padding: 10px;
 }
-.guess-image{
+.guess-text{
 	height: 30px;
+}
+.container{
+	margin: 0 auto;
+	width: 600px;
+}
+.response{
+	margin: 0 auto;
+	width: 50%;
 }
