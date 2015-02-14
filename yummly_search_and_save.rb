@@ -25,11 +25,20 @@ def giant_terrible_method(ingredient)
 		recipe_response = HTTParty.get(recipe_request_url).parsed_response
 		# save only the attributes we want
 		unless recipe_response['nutritionEstimates'][0].nil?
-			# binding.pry
+			energy_attr = recipe_response['nutritionEstimates'].select{|nut| nut['attribute'] == 'ENERC_KCAL'}[0]
+			if energy_attr == nil
+				calories = 0
+			else
+				calories = energy_attr['value']
+			end
+			p '---------------------'
+			p recipe_response['name']
+			p
+
 			recipes << {
 									recipe_id: recipe_response['id'], 
 									name: recipe_response['name'], 
-									calories: recipe_response['nutritionEstimates'][0]['value'],
+									calories: calories,
 									image_url: recipe_response['images'][0]['imageUrlsBySize']['90']
 								 }
 		end
@@ -37,12 +46,12 @@ def giant_terrible_method(ingredient)
 
 	# Write the data to the json file
 
-	json = File.read('test_data.json')
+	json = File.read('food_data.json')
 	secondJsonArray = JSON.parse(json)
 
 	concat_json = secondJsonArray + recipes
 
-	File.open("test_data.json","w") do |f|
+	File.open("food_data.json","w") do |f|
 	  f.puts JSON.pretty_generate(concat_json)
 	end
 end
