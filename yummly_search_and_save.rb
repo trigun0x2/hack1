@@ -35,7 +35,9 @@ recipe_matches_json.each do |recipe|
 end
 
 # Write the data to the json file
-json = File.read('test_data.json')
+json_file = 'test_data.json'
+
+json = File.read(json_file)
 secondJsonArray = JSON.parse(json)
 
 concat_json = secondJsonArray + recipes
