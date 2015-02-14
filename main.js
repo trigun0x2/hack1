@@ -1,23 +1,58 @@
 var RecipeGenerator = new function(){
   var db = data;
+  var current_ans = "";
 
-  this.random_recipe = function(){
+  this.init = function(){
+    $("#guess-submit").click(function(){
+      _checkAnswer();
+    });
+    _random_recipe();
+    $('input[type=text]').on('keyup', function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        _checkAnswer();
+      }
+    });
+  }
+
+  function _random_recipe(){
     random_recipe = db[Math.floor(Math.random()*db.length)]
-    this.set_recipe(random_recipe);
+    _set_recipe(random_recipe);
+    console.log("GEN NEW ONE");
   };
 
-  this.set_recipe = function(recipe){
-    img_url = recipe.smallImageUrls[0];
+  function _set_recipe(recipe){
+    img_url = recipe.image_url
     if (img_url != undefined) {
-      img_url= img_url.replace(".s.png", ".xl.png")
+      img_url= img_url.replace("s90-c", "l90-c")
     }
     $("#guess-image").attr("src", img_url);
-    $("#guess-name").text(recipe.recipeName);
-    console.log(recipe.smallImageUrls[0]);
+    bg_url = "background-image: url('" + img_url + "')"
+    $("#background-image").attr("style", bg_url);
+    current_ans = recipe.calories;
+    console.log(current_ans);
   };
 
+  function _checkAnswer(){
+    console.log("Guessed");
+    ans = parseInt($("#guess-text").val());
+    console.log("ANS:" + ans);
+    console.log("CORRECT ANS:" + current_ans);
+    if (ans == current_ans){
+      $("#spot-on").fadeIn().delay(500).fadeOut();
+      _random_recipe();
+      $("#guess-text").val("");
+    } else if ((ans < current_ans*1.1) && (ans >= current_ans*0.9)){
+      console.log("CORRECT");
+      $("#correct").fadeIn().delay(500).fadeOut();
+      _random_recipe();
+      $("#guess-text").val("");
+    } else {
+      $("#incorrect").fadeIn().delay(500).fadeOut();
+    }
+  };
 }
 
 $(document).ready(function(){
-  RecipeGenerator.random_recipe();
+  RecipeGenerator.init();
 });

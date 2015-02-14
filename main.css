@@ -1,7 +1,6 @@
 body, html {
 }
 body {
-	padding-top: 100px;
 	font-family: Helvetica Neue;	
 }
 #background-image {
@@ -50,15 +49,35 @@ h1{
 	font-weight: 100;
 }
 #guess-image{
-	max-width: 600px;
+	max-width: 400px;
 	margin-top: 15px;
 	margin-bottom: 15px;
+  width: 100%;
 }
 .container{
 	margin: 0 auto;
-	width: 600px;
+	width: 400px;
 }
 .response{
-	margin: 0 auto;
-	width: 45%;
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+.notification{
+  display: none;
+  position: fixed;
+  width: 320px;
+  top: 0;
+  padding: 40px;
+  font-size: 30px;
+  text-align: center;
+}
+#incorrect{
+  background-color: #c0392b;
+}
+#correct{
+  background-color: #c0392b;
+}
+#spot-on{
+  background-color: #8e44ad;
 }
