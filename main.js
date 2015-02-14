@@ -7,9 +7,17 @@ var RecipeGenerator = new function(){
   };
 
   this.set_recipe = function(recipe){
-    $("#guess-image").attr("src", recipe.smallImageUrls[0]);
+    img_url = recipe.smallImageUrls[0];
+    if (img_url != undefined) {
+      img_url= img_url.replace(".s.png", ".xl.png")
+    }
+    $("#guess-image").attr("src", img_url);
     $("#guess-name").text(recipe.recipeName);
     console.log(recipe.smallImageUrls[0]);
   };
 
 }
+
+$(document).ready(function(){
+  RecipeGenerator.random_recipe();
+});
