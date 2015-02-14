@@ -2,8 +2,13 @@ body, html {
 }
 body {
 }
-.button{
+button{
 	background-color: #6dab2c;
 	border: none;
 	color: #fff;
+	font-size: 20px;
+	padding: 10px;
+}
+.guess-image{
+	height: 30px;
 }
